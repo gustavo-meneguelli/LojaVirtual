@@ -1,0 +1,52 @@
+# Visual Studio
+.vscode/
+.vs/
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+.vscode/*.code-workspace
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.sln
+*.csproj
+
+# Auto-generated files
+*.log
+*.tlog
+*.pdb
+*.ilk
+*.obj
+*.exe
+*.dll
+*.vcxproj.user
+*.sdf
+*.opensdf
+*.cachefile
+
+# Build results
+bin/
+obj/
+Debug/
+Release/
+
+# NuGet packages
+*.nupkg
+# The packages folder can be ignored because of Package Restore
+**/packages/*
+# except build/, which is used as an MSBuild target.
+!**/packages/build/
+# Uncomment if necessary however generally it will be regenerated when needed
+#!**/packages/repositories.config
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# End of auto-generated section
+.gitattributes
