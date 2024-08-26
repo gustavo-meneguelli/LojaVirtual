@@ -49,5 +49,13 @@ namespace LojaVirtual.Factory
         /// <returns>Uma instância de <see cref="IMenu"/> representando o menu de lista de produtos.</returns>
         public IMenu CreateProductListMenu(IProductCollection productCollection, EProductsType eProductsType)
             => new ProductListMenu(_menuHelper, this, productCollection, eProductsType);
+
+        /// <summary>
+        /// Cria uma instância do menu do produto escolhido pelo usuário.
+        /// </summary>
+        /// <param name="product">Uma instância que fornece o produto escolhido.</param>
+        /// <returns>Uma instância de <see cref="IMenu"/> representando o menu de opções do produto.</returns>
+        public IMenu CreateProductOptionsMenu(IProduct product)
+            => new ProductOptionsMenu(_menuHelper, this, product);
     }
 }

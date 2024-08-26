@@ -55,7 +55,14 @@ namespace LojaVirtual.Products
         /// </remarks>
         public void ShowDetails()
         {
-            Console.WriteLine("Exibindo Detalhes");
+            Console.WriteLine("------------------------");
+            Console.WriteLine("   Exibindo Detalhes    ");
+            Console.WriteLine("------------------------");
+            Console.WriteLine(
+                $"Titulo: {Name} \n" +
+                $"Autor: {Author} \n" +
+                $"Preço: R${Price} \n" +
+                $"Tipo do produto: {ProductType}");
         }
     }
 }

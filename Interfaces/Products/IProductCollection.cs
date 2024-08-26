@@ -20,5 +20,18 @@
         /// O dicionário resultante permite acessar produtos individuais através de seus IDs únicos, facilitando a manipulação e exibição dos produtos.
         /// </remarks>.
         public Dictionary<int, IProduct> GetAllProducts();
+
+        /// <summary>
+        /// Obtém produto expecífico da coleção a partir do <c>Id</c>> inserido.
+        /// </summary>
+        /// <param name="id">Número de indentificação do produto na coleção.</param>
+        /// <returns>
+        /// Uma instância de <see cref="IProduct"/> dentro da coleção em <see cref="IProductCollection"/> indentificado pelo <c>Id</c> injetado.
+        /// </returns>
+        /// <remarks>
+        /// O método <c>GetProductAtId</c> deve ser implementado para retornar um produto específico armazenado na coleção baseado em seu Id.
+        /// A instância de <see cref="IProduct"/> resultante permite acessar o produto de forma individual, facilitando a manipulação. 
+        /// </remarks>
+        public IProduct GetProductAtId(int id);
     }
 }

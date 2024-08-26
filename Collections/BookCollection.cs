@@ -36,5 +36,13 @@ namespace LojaVirtual.Collections
         /// </summary>
         /// <returns>Um dicionário de livros, onde a chave é o identificador do livro e o valor é o objeto <see cref="IProduct"/> correspondente.</returns>
         public Dictionary<int, IProduct> GetAllProducts() => Books;
+
+        /// <summary>
+        /// Obtém o produto da coleção de livros.
+        /// </summary>
+        /// <param name="id">Número de identificação na coleção</param>
+        /// <returns>Uma instância de <see cref="IProduct"/> que permite manipular o produto de maneira mais flexível. </returns>
+        public IProduct GetProductAtId(int id)
+            => Books[id];
     }
 }
