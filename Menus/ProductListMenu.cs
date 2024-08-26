@@ -78,17 +78,21 @@ namespace LojaVirtual.Menus
         /// Inicializa o menu de lista de produtos.
         /// </summary>
         /// <remarks>
-        /// Este método lida com a seleção do usuário. Em caso de erro, uma mensagem genérica é exibida.
+        /// Este método lida com a seleção do usuário, exibindo, obtendo a entrada do usuário e o produto selecionado. 
+        /// Em caso de erro, uma mensagem genérica é exibida.
         /// </remarks>
         public void Start()
         {
             try
             {
-                int input = GetUserSelection();
+                int selectOption = GetUserSelection();
+                IProduct product = _productCollection.GetProductAtId(selectOption);
+                IMenu productOptionsMenu = _menuFactory.CreateProductOptionsMenu(product);
+                productOptionsMenu.Start();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Console.WriteLine("...");
+                Console.WriteLine($"Ocorreu um erro ao tentar inicializar as opções do menu de listagem de produtos: {ex.Message}");
             }
             
         }

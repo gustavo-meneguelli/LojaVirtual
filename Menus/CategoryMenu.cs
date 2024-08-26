@@ -76,8 +76,8 @@ namespace LojaVirtual.Menus
         {
             try
             {
-                int input = GetUserSelection();
-                EProductsType productType = (EProductsType)input;
+                int selectOption = GetUserSelection();
+                EProductsType productType = (EProductsType)selectOption;
                 IProductCollection productCollection = _productCollectionManager.GetProductCollectionAtType(productType);
                 IMenu productListMenu = _menuFactory.CreateProductListMenu(productCollection, productType);
                 productListMenu.Start();

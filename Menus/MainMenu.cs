@@ -72,9 +72,9 @@ namespace LojaVirtual.Menus
         /// </remarks>
         public void Start()
         {
-            int input = GetUserSelection();
+            int selectOption = GetUserSelection();
 
-            switch (input)
+            switch (selectOption)
             {
                 case 1:
                     {
@@ -86,13 +86,10 @@ namespace LojaVirtual.Menus
                         catch (Exception ex)
                         {
 
-                            Console.WriteLine($"Ocorreu um erro ao tentar iniciliazar a interface do Menu Principal: {ex.Message}");
+                            Console.WriteLine($"Ocorreu um erro ao tentar iniciliazar a interface do menu de categoria: {ex.Message}");
                         }
                         break;
                     }
-                    
-                default:
-                    break;
             }
         }
 
