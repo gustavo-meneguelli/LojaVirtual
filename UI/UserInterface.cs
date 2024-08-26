@@ -4,6 +4,13 @@ using LojaVirtual.Interfaces.Products;
 
 namespace LojaVirtual.UI
 {
+    /// <summary>
+    /// Representa a interface do usuário da aplicação, responsável por inicializar e exibir menus interativos.
+    /// </summary>
+    /// <remarks>
+    /// A classe <see cref="UserInterface"/> coordena a criação e exibição dos menus, utilizando fábricas de menus e gerenciadores de coleção de produtos.
+    /// Ela também lida com possíveis exceções que possam ocorrer durante a inicialização dos menus.
+    /// </remarks>
     internal class UserInterface
     {
         private readonly IMenuHelper _menuHelper;
