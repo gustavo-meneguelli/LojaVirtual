@@ -1,4 +1,5 @@
-﻿using LojaVirtual.Interfaces.Factory;
+﻿using LojaVirtual.Interfaces.Entities;
+using LojaVirtual.Interfaces.Factory;
 using LojaVirtual.Interfaces.Menus;
 using LojaVirtual.Interfaces.Products;
 
@@ -12,6 +13,7 @@ namespace LojaVirtual.Menus
     /// </remarks>
     internal class MainMenu : IMenu
     {
+        private readonly IUser _user;
         private readonly IProductCollectionManager _productCollectionManager;
         private readonly IMenuHelper _menuHelper;
         private readonly IMenuFactory _menuFactory;
@@ -19,12 +21,14 @@ namespace LojaVirtual.Menus
         /// <summary>
         /// Inicializa uma nova instância da classe <see cref="MainMenu"/>.
         /// </summary>
+        /// <param name="user">Uma instância que fornece o usuário que estará logado no sistema. Deve implementar de <see cref="IUser"/>.</param>
         /// <param name="menuHelper">Uma instância que fornece métodos auxiliares para renderização e validação de menus. Deve implementar <see cref="IMenuHelper"/>.</param>
         /// <param name="menuFactory">Uma instância que é responsável pela criação de menus. Deve implementar <see cref="IMenuFactory"/>.</param>
         /// <param name="productCollectionManager">Uma instância que gerencia as coleções de produtos. Deve implementar <see cref="IProductCollectionManager"/>.</param>
-        public MainMenu(IMenuHelper menuHelper, IMenuFactory menuFactory, IProductCollectionManager productCollectionManager)
+        public MainMenu(IUser user, IMenuHelper menuHelper, IMenuFactory menuFactory, IProductCollectionManager productCollectionManager)
         {
-             _menuHelper = menuHelper;
+            _user = user;
+            _menuHelper = menuHelper;
             _productCollectionManager = productCollectionManager;
             _menuFactory = menuFactory;
         }
@@ -53,7 +57,7 @@ namespace LojaVirtual.Menus
             while (true)
             {
                 Console.Clear();
-
+                _user.ShowDetails();
                 _menuHelper.Render("Menu Principal", menuOptions);
                 input = _menuHelper.GetUserInput();
 
@@ -72,24 +76,36 @@ namespace LojaVirtual.Menus
         /// </remarks>
         public void Start()
         {
-            int selectOption = GetUserSelection();
+            int selectOption;
 
-            switch (selectOption)
+            while (true)
             {
-                case 1:
-                    {
-                        try
-                        {
-                            IMenu categoryMenu = _menuFactory.CreateCategoryMenu(_productCollectionManager);
-                            categoryMenu.Start();
-                        }
-                        catch (Exception ex)
-                        {
+                selectOption = GetUserSelection();
 
-                            Console.WriteLine($"Ocorreu um erro ao tentar iniciliazar a interface do menu de categoria: {ex.Message}");
+                switch (selectOption)
+                {
+                    case 1:
+                        {
+                            try
+                            {
+                                IMenu categoryMenu = _menuFactory.CreateCategoryMenu(_productCollectionManager);
+                                categoryMenu.Start();
+                            }
+                            catch (Exception ex)
+                            {
+
+                                Console.WriteLine($"Ocorreu um erro ao tentar iniciliazar a interface do menu de categoria: {ex.Message}");
+                                Console.ReadKey();
+                            }
+                            break;
                         }
+                    case 0:
+                        Console.WriteLine("Programa Encerrado."); 
+                        Environment.Exit(0);
                         break;
-                    }
+                }
+
+            
             }
         }
 

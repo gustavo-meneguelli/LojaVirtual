@@ -1,4 +1,5 @@
 ﻿using LojaVirtual.Enums;
+using LojaVirtual.Interfaces.Entities;
 using LojaVirtual.Interfaces.Factory;
 using LojaVirtual.Interfaces.Menus;
 using LojaVirtual.Interfaces.Products;
@@ -13,6 +14,7 @@ namespace LojaVirtual.Menus
     /// </remarks>
     internal class ProductListMenu : IMenu
     {
+        private readonly IUser _user;
         private readonly IMenuHelper _menuHelper;
         private readonly IMenuFactory _menuFactory;
         private readonly IProductCollection _productCollection;
@@ -21,12 +23,14 @@ namespace LojaVirtual.Menus
         /// <summary>
         /// Inicializa uma nova instância da classe <see cref="ProductListMenu"/>.
         /// </summary>
+        /// <param name="user">Uma instância que fornece o usuário que estará logado no sistema. Deve implementar de <see cref="IUser"/>.</param>
         /// <param name="menuHelper">Uma instância que fornece métodos auxiliares para renderização e validação de menus. Deve implementar <see cref="IMenuHelper"/>.</param>
         /// <param name="menuFactory">Uma instância responsável pela criação de menus. Deve implementar <see cref="IMenuFactory"/>.</param>
         /// <param name="productCollection">Uma instância que fornece acesso à coleção de produtos. Deve implementar <see cref="IProductCollection"/>.</param>
         /// <param name="eProductType">O tipo de produto para o qual a lista de produtos será exibida. Deve ser um valor da enumeração <see cref="EProductsType"/>.</param>
-        public ProductListMenu(IMenuHelper menuHelper, IMenuFactory menuFactory, IProductCollection productCollection, EProductsType eProductType)
+        public ProductListMenu(IUser user, IMenuHelper menuHelper, IMenuFactory menuFactory, IProductCollection productCollection, EProductsType eProductType)
         {
+            _user = user;
             _menuHelper = menuHelper;
             _menuFactory = menuFactory;
             _productCollection = productCollection;
@@ -65,6 +69,7 @@ namespace LojaVirtual.Menus
             while (true)
             {
                 Console.Clear();
+                _user.ShowDetails();
                 _menuHelper.Render($"Produtos do tipo: [{_productType}]", menuOptions);
                 input = _menuHelper.GetUserInput();
 
@@ -93,6 +98,7 @@ namespace LojaVirtual.Menus
             catch (Exception ex)
             {
                 Console.WriteLine($"Ocorreu um erro ao tentar inicializar as opções do menu de listagem de produtos: {ex.Message}");
+                Console.ReadKey();
             }
             
         }

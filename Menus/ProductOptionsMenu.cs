@@ -1,4 +1,5 @@
-﻿using LojaVirtual.Interfaces.Factory;
+﻿using LojaVirtual.Interfaces.Entities;
+using LojaVirtual.Interfaces.Factory;
 using LojaVirtual.Interfaces.Menus;
 using LojaVirtual.Interfaces.Products;
 
@@ -14,6 +15,7 @@ namespace LojaVirtual.Menus
     /// </remarks>
     internal class ProductOptionsMenu : IMenu
     {
+        private readonly IUser _user;
         private readonly IMenuFactory _menuFactory;
         private readonly IMenuHelper _menuHelper;
         private readonly IProduct _product;
@@ -21,11 +23,13 @@ namespace LojaVirtual.Menus
         /// <summary>
         /// Inicializa uma nova instância da classe <see cref="ProductOptionsMenu"/>.
         /// </summary>
+        /// <param name="user">Uma instância que fornece o usuário que estará logado no sistema. Deve implementar de <see cref="IUser"/>.</param>
         /// <param name="menuHelper">Uma instância que fornece métodos auxiliares para renderização e validação de menus. Deve implementar <see cref="IMenuHelper"/>.</param>
         /// <param name="menuFactory">Uma instância que é responsável pela criação de menus. Deve implementar <see cref="IMenuFactory"/>.</param>
         /// <param name="product">Uma instância do produto cujas opções são exibidas no menu. Deve implementar <see cref="IProduct"/>.</param>
-        public ProductOptionsMenu(IMenuHelper menuHelper, IMenuFactory menuFactory, IProduct product)
+        public ProductOptionsMenu(IUser user, IMenuHelper menuHelper, IMenuFactory menuFactory, IProduct product)
         {
+            _user = user;
             _menuHelper = menuHelper;
             _menuFactory = menuFactory;
             _product = product;
@@ -50,6 +54,7 @@ namespace LojaVirtual.Menus
             while (true)
             {
                 Console.Clear();
+                _user.ShowDetails();
                 _menuHelper.Render($"Menu de opções: {_product.Name}", menuOptions);
                 input = _menuHelper.GetUserInput();
 
@@ -62,6 +67,10 @@ namespace LojaVirtual.Menus
         /// <summary>
         /// Inicia a exibição do menu de opções do produto e processa a seleção do usuário.
         /// </summary>
+        /// <remarks>
+        /// Esse método lida com a seleção do usuário, exibindo, obtendo e validando a escolha do usuário no meu de opções do produto.
+        /// Em caso de erro uma mensagem genérica será exibida.
+        /// </remarks>
         public void Start()
         {
             try
@@ -74,6 +83,8 @@ namespace LojaVirtual.Menus
                         _product.ShowDetails();
                         break;
                     case 2:
+                        var paymentMenu = _menuFactory.CreatePaymentMenu(_product);
+                        paymentMenu.Start();
                         break;
                     default:
                         break;
@@ -82,6 +93,7 @@ namespace LojaVirtual.Menus
             catch (Exception ex)
             {
                 Console.WriteLine($"Ocorreu um erro ao tentar inicializar o menu de compra: {ex.Message}");
+                Console.ReadKey();
             }
         }
     }
