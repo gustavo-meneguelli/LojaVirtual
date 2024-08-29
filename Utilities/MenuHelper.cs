@@ -23,6 +23,9 @@ namespace LojaVirtual.Utilities
             Console.WriteLine("------------------------");
             for (int i = 0; i < listMenuOptions.Count; i++)
                 Console.WriteLine($"[{i + 1}] {listMenuOptions[i]}");
+            Console.WriteLine("-----------------------");
+            Console.WriteLine("[0] Sair / Voltar ao menu principal");
+            Console.WriteLine("-----------------------");
         }
 
         /// <summary>
@@ -33,7 +36,6 @@ namespace LojaVirtual.Utilities
         /// </returns>
         public int GetUserInput()
         {
-            Console.WriteLine("------------------------");
             Console.Write("Digite a opção desejada: ");
             string? input = Console.ReadLine();
 
