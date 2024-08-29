@@ -43,5 +43,12 @@ namespace LojaVirtual.Interfaces.Factory
         /// <returns>Uma instância de <see cref="IMenu"/> que representa o menu de opções do produto.</returns>
         IMenu CreateProductOptionsMenu(IProduct product);
 
+        /// <summary>
+        /// Cria um menu de pagamento.
+        /// </summary>
+        /// <param name="product">Produto a ser injetado para ser comprado.</param>
+        /// <returns>Uma instância de <see cref="IMenu"/> que representa o menu de pagamento.</returns>
+        IMenu CreatePaymentMenu(IProduct product);
+
     }
 }
