@@ -77,6 +77,9 @@ namespace LojaVirtual.Menus
             {
                 int selectOption = GetUserSelection();
 
+                if (selectOption == 0) //Voltar ao menu principal
+                    return;
+
                 switch (selectOption)
                 {
                     case 1:

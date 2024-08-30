@@ -76,8 +76,12 @@ namespace LojaVirtual.Menus
         {
             try
             {
-                int userSelection = GetUserSelection();
-                EPaymentType paymentType = (EPaymentType)userSelection;
+                int selectOption = GetUserSelection();
+
+                if (selectOption == 0) //Voltar ao menu principal
+                    return;
+
+                EPaymentType paymentType = (EPaymentType)selectOption;
                 IPayment payment = PaymentFactory.CreatePayment(paymentType, _user, _product);
                 payment.Pay();
             }

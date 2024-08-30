@@ -91,6 +91,10 @@ namespace LojaVirtual.Menus
             try
             {
                 int selectOption = GetUserSelection();
+
+                if (selectOption == 0) //Voltar ao menu principal
+                    return;
+
                 IProduct product = _productCollection.GetProductAtId(selectOption);
                 IMenu productOptionsMenu = _menuFactory.CreateProductOptionsMenu(product);
                 productOptionsMenu.Start();
