@@ -1,4 +1,5 @@
-﻿using LojaVirtual.Interfaces.Entities;
+﻿using LojaVirtual.Enums;
+using LojaVirtual.Interfaces.Entities;
 using LojaVirtual.Interfaces.Payment;
 using LojaVirtual.Interfaces.Products;
 
@@ -25,10 +26,16 @@ namespace LojaVirtual.Payments
             {
                 ShowInvoice();
                 _user.CreditCardBalance -= _product.Price;
+                _user.PurchasedProducts.Add(new List<object> { _product.Name, _product.Price, _paymentDate, _product.ProductType, EPaymentType.CartãoCrédito }); //Adicionando a compra na lista de compras do usuário.
             }
             else
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("Pagamento não realizado por falta de limite no cartão.");
+                Console.ForegroundColor = ConsoleColor.White;
+            }
 
+            Console.WriteLine("------------------------------------------");
             Console.WriteLine("Pressione qualquer tecla para continuar...");
             Console.ReadKey();
         }
