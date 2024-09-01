@@ -24,7 +24,8 @@ namespace LojaVirtual.ProductManagement
         {
             _productsCollections = new Dictionary<EProductsType, IProductCollection>
             {
-                { EProductsType.Book, new BookCollection() }
+                { EProductsType.Book, new BookCollection() },
+                { EProductsType.Ebook, new EbookCollection() },
             };
         }
 
