@@ -13,6 +13,8 @@ Esse projeto está sendo desenvolvido com finalidade de estudo, aplicando concei
 - Visualização de categorias de produtos.
 - Detalhes do produto e opções de compra.
 - Emissão de nota fiscal no console.
+- Visualização dos produtos comprados.
+- Diferentes tipos de pagamentos.
 
 ## Tecnologias Utilizadas
 
