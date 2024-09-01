@@ -40,7 +40,7 @@ namespace LojaVirtual.Menus
         /// Uma lista de opções do menu principal que são exibidas para o usuário.
         /// </returns>
         private List<string> GetMenuOptions() 
-            => new List<string> { "Produtos Disponíveis " };
+            => new List<string> { "Produtos Disponíveis ", "Produtos Comprados" };
 
         /// <summary>
         /// Exibe o menu no console e recebe o valor digitado pelo usuário.
@@ -99,6 +99,9 @@ namespace LojaVirtual.Menus
                             }
                             break;
                         }
+                    case 2:
+                        _user.ShowPurchasedProducts();
+                        break;
                     case 0:
                         Console.WriteLine("Programa Encerrado."); 
                         Environment.Exit(0);
